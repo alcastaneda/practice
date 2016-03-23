@@ -1,7 +1,6 @@
 class RestaurantController < ApplicationController
   def index
-    new_client
-     p @client.get("4ijn-s7e5.json",{"$limit" => 10, :aka_name=>"NICKY'S RESTAURANT"})
+    @client.get("4ijn-s7e5.json")
   end
 
   def new_search
