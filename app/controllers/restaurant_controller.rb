@@ -1,11 +1,25 @@
 class RestaurantController < ApplicationController
   def index
-    client = SODA::Client.new({:domain => "data.cityofchicago.org", :app_token => ENV['RESTAURANT_API_TOKEN']})
-    p client.get("4ijn-s7e5.json",{"$limit" => 10, :aka_name=>"NICKY'S RESTAURANT"})
+    new_client
+     p @client.get("4ijn-s7e5.json",{"$limit" => 10, :aka_name=>"NICKY'S RESTAURANT"})
+  end
+
+  def new_search
+
   end
 
   def search
+    new_client
+    if params
+       @restaurants= @client.get("4ijn-s7e5.json",{"$limit" => 1, :aka_name=>params[:restaurant_name]})
+      p @restaurant = @restaurants[0]
+    else
 
+    end
+  end
+
+  def new_client
+     @client = SODA::Client.new({:domain => "data.cityofchicago.org", :app_token => ENV['RESTAURANT_API_TOKEN']})
   end
 end
 # https://data.cityofchicago.org/resource/4ijn-s7e5.json
