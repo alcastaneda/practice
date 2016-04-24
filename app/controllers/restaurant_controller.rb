@@ -1,4 +1,5 @@
 class RestaurantController < ApplicationController
+  before_action :new_client
   def index
     @client.get("4ijn-s7e5.json")
   end
@@ -17,6 +18,7 @@ class RestaurantController < ApplicationController
     end
   end
 
+private
   def new_client
      @client = SODA::Client.new({:domain => "data.cityofchicago.org", :app_token => ENV['RESTAURANT_API_TOKEN']})
   end
