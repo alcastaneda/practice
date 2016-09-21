@@ -8,3 +8,16 @@ html{
   background-color: $red;
 }
 
+div{
+  position: relative;
+  width: 50%;
+  margin: auto;
+}
+
+section{
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  overflow: scroll;
+  height: 60%;
+}
