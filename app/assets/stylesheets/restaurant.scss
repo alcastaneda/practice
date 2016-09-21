@@ -8,7 +8,7 @@ html{
   background-color: $red;
 }
 
-div{
+.clipboard{
   position: relative;
   width: 50%;
   margin: auto;
@@ -20,4 +20,11 @@ section{
   left: 20%;
   overflow: scroll;
   height: 60%;
+}
+
+.chef img{
+  width: 30%;
+  position: absolute;
+  top: 60%;
+  left: 10%;
 }
