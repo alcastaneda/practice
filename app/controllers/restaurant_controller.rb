@@ -1,9 +1,9 @@
 class RestaurantController < ApplicationController
   before_action :new_client
-  def index
-    @client.get("cwig-ma7x.json")
-    p @restaurants= @client.get("4ijn-s7e5.json",{"$limit" => 50})
-  end
+  # def index
+  #   @client.get("cwig-ma7x.json")
+  #   p @restaurants= @client.get("4ijn-s7e5.json",{"$limit" => 50})
+  # end
 
   def new_search
 
@@ -13,26 +13,14 @@ class RestaurantController < ApplicationController
 
     if params
           @input = params[:restaurant_name].upcase
-       @restaurants= @client.get("cwig-ma7x.json",{"$limit" => 10, "$where"=> "starts_with(aka_name,'" + @input + "')"})
-       p @restaurants
-       p @client
-      if params != @restaurants[0]
-       # @restaurants = HTTParty.get('http://data.cityofchicago.org/resource/cwig-ma7x.json?$where=starts_with(aka_name,'+@input+')')
-       p @restaurants
-       @restaurant=@restaurants[0]
-      else
-        @restaurant = @restaurants[0]
-      end
+          @restaurants= @client.get("cwig-ma7x.json",{"$limit" => 10, "$where"=> "starts_with(aka_name,'" + @input + "')"})
+          p@restaurants
     end
   end
 
 private
   def new_client
      @client = SODA::Client.new({:domain => "data.cityofchicago.org", :app_token => ENV['RESTAURANT_API_TOKEN']})
-  end
-
-  def parse_input
-
   end
 
 end

@@ -1,15 +1,18 @@
-<% if @restaurant %>
-<h1><%= @restaurant.aka_name %></h1>
+<% if @restaurants[0] %>
 
-<h3><%=@restaurant.address %></h3>
-<h3><%=@restaurant.city %> <%=@restaurant.state %></h3>
+  <% @restaurants.each do |restaurant| %>
+    <h1><%=  restaurant.aka_name %></h1>
 
-<ul>
-  <li><%=@restaurant.inspection_type %></li>
-  <li><%=@restaurant.inspection_date %></li>
-  <li><%=@restaurant.results %></li>
-  <li><%=@restaurant.violations %></li>
-</ul>
+    <h3><%= restaurant.address %></h3>
+    <h3><%= restaurant.city %> <%= restaurant.state %></h3>
+
+    <ul>
+      <li><%= restaurant.inspection_type %></li>
+      <li><%= restaurant.inspection_date %></li>
+      <li><%= restaurant.results %></li>
+      <li><%= restaurant.violations %></li>
+    </ul>
+  <% end %>
 <% else %>
     <h3>No restaurant found, try again</h3>
 <% end %>
