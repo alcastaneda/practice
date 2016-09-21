@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
  root 'restaurant#new_search'
   get 'restaurant/index'
-  get 'restaurant/new_search'
+  # get 'restaurant/new_search'
   get 'restaurant/search'
 
 

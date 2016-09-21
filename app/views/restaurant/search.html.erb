@@ -1,3 +1,4 @@
+<% if @restaurant %>
 <h1><%= @restaurant.aka_name %></h1>
 
 <h3><%=@restaurant.address %></h3>
@@ -9,5 +10,8 @@
   <li><%=@restaurant.results %></li>
   <li><%=@restaurant.violations %></li>
 </ul>
+<% else %>
+    <h3>No restaurant found, try again</h3>
+<% end %>
 
 

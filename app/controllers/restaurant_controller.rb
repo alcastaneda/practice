@@ -1,7 +1,8 @@
 class RestaurantController < ApplicationController
   before_action :new_client
   def index
-    @client.get("4ijn-s7e5.json")
+    @client.get("cwig-ma7x.json")
+    p @restaurants= @client.get("4ijn-s7e5.json",{"$limit" => 50})
   end
 
   def new_search
@@ -9,12 +10,19 @@ class RestaurantController < ApplicationController
   end
 
   def search
-    new_client
-    if params
-       @restaurants= @client.get("4ijn-s7e5.json",{"$limit" => 1, :aka_name=>params[:restaurant_name]})
-      p @restaurant = @restaurants[0]
-    else
 
+    if params
+          @input = params[:restaurant_name].upcase
+       @restaurants= @client.get("cwig-ma7x.json",{"$limit" => 10, "$where"=> "starts_with(aka_name,'" + @input + "')"})
+       p @restaurants
+       p @client
+      if params != @restaurants[0]
+       # @restaurants = HTTParty.get('http://data.cityofchicago.org/resource/cwig-ma7x.json?$where=starts_with(aka_name,'+@input+')')
+       p @restaurants
+       @restaurant=@restaurants[0]
+      else
+        @restaurant = @restaurants[0]
+      end
     end
   end
 
@@ -22,7 +30,15 @@ private
   def new_client
      @client = SODA::Client.new({:domain => "data.cityofchicago.org", :app_token => ENV['RESTAURANT_API_TOKEN']})
   end
+
+  def parse_input
+
+  end
+
 end
+
+#<Hashie::Mash address="5575 W VAN BUREN ST " aka_name="G & N FOOD & LIQUOR" city="CHICAGO" dba_name="G & N FOOD & LIQUOR INC" facility_type="Grocery Store" inspection_date="2016-04-22T00:00:00" inspection_id="1763434" inspection_type="License Re-Inspection" latitude="41.874620484855676" license_="2418103" location=#<Hashie::Mash latitude="41.874620484855676" longitude="-87.76450473922907" needs_recoding=false> longitude="-87.76450473922907" results="Pass" risk="Risk 3 (Low)" state="IL" zip="60644">
+
 # https://data.cityofchicago.org/resource/4ijn-s7e5.json
 
 # API Fields
