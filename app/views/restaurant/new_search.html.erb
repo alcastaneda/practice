@@ -3,5 +3,8 @@
 <%= form_tag(restaurant_search_path, :method => "get", id: "search-form") do %>
     <%= label_tag :restaurant_name %>
     <%= text_field_tag :restaurant_name %>
-    <%= submit_tag "Search" %>
+   <div class="submit-btn">
+      <%=image_tag("http://image.flaticon.com/icons/svg/53/53864.svg")%>
+      <%= submit_tag "Search", :class => "submit" %>
+    </div>
 <% end %>
